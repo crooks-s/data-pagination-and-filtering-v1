@@ -62,7 +62,7 @@ function addPagination(list){
    for (let i=1; i<=numBtns; i++){
       let html = `
          <li>
-            <button type='button'>[i]</button>
+            <button type='button'>${i}</button>
          </li>
       `;
 
