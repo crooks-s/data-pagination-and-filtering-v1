@@ -12,6 +12,9 @@ For assistance:
 */
 
 
+const studentList = document.querySelector('.student-list');
+const linkList = document.querySelector('.link-list');
+
 
 
 // Create and insert student elements for the page
@@ -20,7 +23,6 @@ function showPage(list, page){
    startIndex = (page * 9) - 9;
    endIndex = page * 9;
 
-   const studentList = document.querySelector('.student-list');
    studentList.innerHTML = '';
 
    // Iterates through the list array to generate html content
@@ -50,7 +52,6 @@ function showPage(list, page){
 
 function addPagination(list){
    const numBtns = Math.ceil(list.length / 9);
-   const linkList = document.querySelector('.link-list');
    linkList.innerHTML = '';
 
    for (let i=1; i<=numBtns; i++){
@@ -96,8 +97,8 @@ function addSearch(){
       for (let i = 0; i<data.length; i++){
          const firstNameLower = data[i].name.first.toLowerCase();
          const lastNameLower = data[i].name.last.toLowerCase();
-         if(firstNameLower.includes(userInput
-            || lastNameLower.includes(userInput))
+         const fullNameLower = firstNameLower + ' ' + lastNameLower;
+         if(fullNameLower.includes(userInput)
          ){
             filterArr.push(data[i]);
          }
@@ -106,6 +107,9 @@ function addSearch(){
    }
    
    function updateDisplay(filteredData){
+      studentList.innerHTML = '';
+      linkList.innerHTML = '';
+      
       if(filteredData.length > 0){
          addPagination(filteredData);
          showPage(filteredData, 1);
@@ -116,12 +120,10 @@ function addSearch(){
    }
 
    input.addEventListener('keyup', () => {
-      const userInput = input.value.trim().toLowerCase();
+      const userInput = input.value.toLowerCase();
       const filterArr = filterData(userInput);
       updateDisplay(filterArr);
    })
-
-   updateDisplay(data);
 }
 
 // Call functions
