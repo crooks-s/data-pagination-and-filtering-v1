@@ -76,6 +76,7 @@ function addPagination(list){
 }
 
 // Search bar
+// @data is the array to obtain names
 function addSearch(){
    const header = document.querySelector('.header');
    let searchHTML = `
@@ -87,6 +88,31 @@ function addSearch(){
    `;
 
    header.insertAdjacentHTML('beforeend', searchHTML);
+   const input = document.querySelector('#search');
+   // iterate through data names (first and last) to check if they include user input
+
+   input.addEventListener('keyup', () => {
+      const filterArr = [];
+      const userInput = input.value.trim().toLowerCase();
+
+      for (let i = 0; i<data.length; i++){
+         const firstNameLower = data[i].name.first.toLowerCase();
+         const lastNameLower = data[i].name.last.toLowerCase();
+         if(firstNameLower.includes(userInput
+            || lastNameLower.includes(userInput))
+         ){
+            filterArr.push(data[i]);
+         }
+      }
+
+      if(filterArr.length > 0){
+         addPagination(filterArr);
+         showPage(filterArr, 1);
+      } else {
+         document.querySelector('.student-list').innerHTML = '<h2>No results found.</h2>'
+         document.querySelector('.link-list').innerHTML = '';
+      }
+   })
 }
 
 // Call functions
