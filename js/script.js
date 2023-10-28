@@ -13,11 +13,9 @@ For assistance:
 
 
 
-/***
- 
-Create and insert student elements for the page
 
-***/
+// Create and insert student elements for the page
+
 function showPage(list, page){
    startIndex = (page * 9) - 9;
    endIndex = page * 9;
@@ -48,11 +46,7 @@ function showPage(list, page){
 }
 
 
-/***
-
-Create and insert elements needed for pagination buttons
-
-***/
+// Create and insert elements needed for pagination buttons
 
 function addPagination(list){
    const numBtns = Math.ceil(list.length / 9);
@@ -81,7 +75,21 @@ function addPagination(list){
    })
 }
 
+// Search bar
+function addSearch(){
+   const header = document.querySelector('.header');
+   let searchHTML = `
+      <label for="search" class="student-search">
+         <span>Search by name</span>
+         <input id="search" placeholder="Search by name...">
+         <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+      </label>
+   `;
+
+   header.insertAdjacentHTML('beforeend', searchHTML);
+}
 
 // Call functions
 showPage(data, 1);
 addPagination(data);
+addSearch();
