@@ -91,10 +91,8 @@ function addSearch(){
    const input = document.querySelector('#search');
    // iterate through data names (first and last) to check if they include user input
 
-   input.addEventListener('keyup', () => {
+   function filterData(userInput){
       const filterArr = [];
-      const userInput = input.value.trim().toLowerCase();
-
       for (let i = 0; i<data.length; i++){
          const firstNameLower = data[i].name.first.toLowerCase();
          const lastNameLower = data[i].name.last.toLowerCase();
@@ -104,15 +102,26 @@ function addSearch(){
             filterArr.push(data[i]);
          }
       }
-
-      if(filterArr.length > 0){
-         addPagination(filterArr);
-         showPage(filterArr, 1);
+      return filterArr;
+   }
+   
+   function updateDisplay(filteredData){
+      if(filteredData.length > 0){
+         addPagination(filteredData);
+         showPage(filteredData, 1);
       } else {
          document.querySelector('.student-list').innerHTML = '<h2>No results found.</h2>'
          document.querySelector('.link-list').innerHTML = '';
       }
+   }
+
+   input.addEventListener('keyup', () => {
+      const userInput = input.value.trim().toLowerCase();
+      const filterArr = filterData(userInput);
+      updateDisplay(filterArr);
    })
+
+   updateDisplay(data);
 }
 
 // Call functions
