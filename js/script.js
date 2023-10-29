@@ -14,19 +14,17 @@ For assistance:
 
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
-
-
+const studentsPerPage = 9;
 
 // Create and insert student elements for the page
-
 function showPage(list, page){
-   startIndex = (page * 9) - 9;
-   endIndex = page * 9;
+   startIndex = (page * studentsPerPage) - studentsPerPage;
+   endIndex = page * studentsPerPage;
 
+   // empty HTML content to prevent duplicated code
    studentList.innerHTML = '';
 
    // Iterates through the list array to generate html content
-
    for (let i=0; i<list.length; i++){
       if (i >= startIndex && i < endIndex){
          let html = `
@@ -49,7 +47,6 @@ function showPage(list, page){
 
 
 // Create and insert elements needed for pagination buttons
-
 function addPagination(list){
    const numBtns = Math.ceil(list.length / 9);
    linkList.innerHTML = '';
@@ -64,6 +61,7 @@ function addPagination(list){
       linkList.insertAdjacentHTML('beforeend', html);
    }
 
+   // give 'active' class to first button
    document.querySelector('button').className = 'active';
 
    // on 'click', active class transferred to clicked button
@@ -76,8 +74,7 @@ function addPagination(list){
    })
 }
 
-// Search bar
-// @data is the array to obtain names
+// Search bar function
 function addSearch(){
    const header = document.querySelector('.header');
    let searchHTML = `
@@ -90,15 +87,16 @@ function addSearch(){
 
    header.insertAdjacentHTML('beforeend', searchHTML);
    const input = document.querySelector('#search');
-   // iterate through data names (first and last) to check if they include user input
 
+   // iterate through data names (first and last) to check if they include user input
    function filterData(userInput){
       const filterArr = [];
       for (let i = 0; i<data.length; i++){
-         const firstNameLower = data[i].name.first.toLowerCase();
-         const lastNameLower = data[i].name.last.toLowerCase();
-         const fullNameLower = firstNameLower + ' ' + lastNameLower;
-         if(fullNameLower.includes(userInput)
+         const firstName = data[i].name.first.toLowerCase();
+         const lastName = data[i].name.last.toLowerCase();
+         const fullName = firstName + ' ' + lastName;
+
+         if(fullName.includes(userInput)
          ){
             filterArr.push(data[i]);
          }
@@ -106,7 +104,10 @@ function addSearch(){
       return filterArr;
    }
    
+   // updates the page with newly filtered students
    function updateDisplay(filteredData){
+
+      // erase previously populated code
       studentList.innerHTML = '';
       linkList.innerHTML = '';
       
@@ -119,6 +120,7 @@ function addSearch(){
       }
    }
 
+   // updates the page with newly filtered students
    input.addEventListener('keyup', () => {
       const userInput = input.value.toLowerCase();
       const filterArr = filterData(userInput);
