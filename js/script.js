@@ -62,7 +62,7 @@ function addPagination(list){
    }
 
    // give 'active' class to first button
-   document.querySelector('button').className = 'active';
+   document.querySelector('li button').className = 'active';
 
    // on 'click', active class transferred to clicked button
    linkList.addEventListener('click', (e) => {
@@ -90,7 +90,7 @@ function addSearch(){
 
    // iterate through data names (first and last) to check if they include user input
    function filterData(userInput){
-      const filterArr = [];
+      const filteredArr = [];
       for (let i = 0; i<data.length; i++){
          const firstName = data[i].name.first.toLowerCase();
          const lastName = data[i].name.last.toLowerCase();
@@ -98,10 +98,10 @@ function addSearch(){
 
          if(fullName.includes(userInput)
          ){
-            filterArr.push(data[i]);
+            filteredArr.push(data[i]);
          }
       }
-      return filterArr;
+      return filteredArr;
    }
    
    // updates the page with newly filtered students
@@ -123,8 +123,8 @@ function addSearch(){
    // updates the page with newly filtered students
    input.addEventListener('keyup', () => {
       const userInput = input.value.toLowerCase();
-      const filterArr = filterData(userInput);
-      updateDisplay(filterArr);
+      const filteredArr = filterData(userInput);
+      updateDisplay(filteredArr);
    })
 }
 
