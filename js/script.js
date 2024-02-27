@@ -1,23 +1,9 @@
-/*
-Treehouse Techdegree:
-FSJS Project 2 - Data Pagination and Filtering
-*/
-
-
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
 const studentsPerPage = 9;
 
 // Create and insert student elements for the page
-function showPage(list, page){
+function showPage(list, page) {
    startIndex = (page * studentsPerPage) - studentsPerPage;
    endIndex = page * studentsPerPage;
 
@@ -25,8 +11,8 @@ function showPage(list, page){
    studentList.innerHTML = '';
 
    // Iterates through the list array to generate html content
-   for (let i=0; i<list.length; i++){
-      if (i >= startIndex && i < endIndex){
+   for (const i in list) {
+      if (i >= startIndex && i < endIndex) {
          let html = `
          <li class="student-item cf">
          <div class="student-details">
@@ -45,13 +31,12 @@ function showPage(list, page){
    }
 }
 
-
 // Create and insert elements needed for pagination buttons
-function addPagination(list){
+function addPagination(list) {
    const numBtns = Math.ceil(list.length / 9);
    linkList.innerHTML = '';
 
-   for (let i=1; i<=numBtns; i++){
+   for (let i = 1; i <= numBtns; i++) {
       let html = `
          <li>
             <button type='button'>${i}</button>
@@ -66,7 +51,7 @@ function addPagination(list){
 
    // on 'click', active class transferred to clicked button
    linkList.addEventListener('click', (e) => {
-      if(e.target.tagName === 'BUTTON'){
+      if (e.target.tagName === 'BUTTON') {
          document.querySelector('.active').className = '';
          e.target.className = 'active';
          showPage(list, e.target.textContent);
@@ -75,7 +60,7 @@ function addPagination(list){
 }
 
 // Search bar function
-function addSearch(){
+function addSearch() {
    const header = document.querySelector('.header');
    let searchHTML = `
       <label for="search" class="student-search">
@@ -89,29 +74,28 @@ function addSearch(){
    const input = document.querySelector('#search');
 
    // iterate through data names (first and last) to check if they include user input
-   function filterData(userInput){
+   function filterData(userInput) {
       const filteredArr = [];
-      for (let i = 0; i<data.length; i++){
+      for (const i in data) {
          const firstName = data[i].name.first.toLowerCase();
          const lastName = data[i].name.last.toLowerCase();
          const fullName = firstName + ' ' + lastName;
 
-         if(fullName.includes(userInput)
-         ){
+         if (fullName.includes(userInput)) {
             filteredArr.push(data[i]);
          }
       }
       return filteredArr;
    }
-   
+
    // updates the page with newly filtered students
-   function updateDisplay(filteredData){
+   function updateDisplay(filteredData) {
 
       // erase previously populated code
       studentList.innerHTML = '';
       linkList.innerHTML = '';
-      
-      if(filteredData.length > 0){
+
+      if (filteredData.length > 0) {
          addPagination(filteredData);
          showPage(filteredData, 1);
       } else {
