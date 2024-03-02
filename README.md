@@ -1,7 +1,7 @@
 # data-pagination-and-filtering-v1
 
 # a_random_quote_generator-v1
-## Intro
+## Introduction
 Treehouse Unit 2 Project. This application presents a list of students in a hard-coded ```data.js``` file. A pagination feature and a 'real-time' search function is added to the application.
 
 ## Tech Stack
