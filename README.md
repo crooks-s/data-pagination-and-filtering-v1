@@ -1,17 +1,28 @@
 # data-pagination-and-filtering-v1
-Team Treehouse Unit 2 Project
 
-This is a Team Treehouse project demonstrating:
+# a_random_quote_generator-v1
+## Intro
+Treehouse Unit 2 Project. This application presents a list of students in a hard-coded ```data.js``` file. A pagination feature and a 'real-time' search function is added to the application.
 
+## Tech Stack
+HTML/CSS. JavaScript.
+
+## Process/Learning (to be updated)
 1. Dom Manipulation
 2. Array iteration methods
 3. Pagination
 4. Event listeners and event handlers
 5. DRYing and refactoring
 
-- This application presents a list of students that are stored in data.js. 
-- A pagination feature was added to show 9 students per page. 
-- Real-time search functionality was added to the search bar by making a 'keyup' event listener.
+## Improvement
+Could implement a database or maybe a fetch API for real-world application. Could add a modal feature.
 
-Author: Sean Crooks
-<br>Contributions: Team Treehouse supplied all files. All script.js logic was written solely by author. 
+## Running the Project
+Clone the project, and simply open ```index.html```
+<br /> Otherwise, I have a live version [here](https://crooks-s.github.io/data-pagination-and-filtering-v1/).
+
+## Author
+Sean Crooks
+
+## Contributions
+Team Treehouse supplied all files. All ```script.js``` logic was written solely by author. 
